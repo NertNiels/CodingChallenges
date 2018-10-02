@@ -1,0 +1,21 @@
+{
+  "name": "nodeservertest",
+  "version": "1.0.0",
+  "description": "Node.JS server test\\",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "node",
+    "test"
+  ],
+  "author": "Niels Smit",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "save": "^2.3.2",
+    "socket.io": "^2.1.1"
+  }
+}
