@@ -8,6 +8,8 @@ var down = false;
 
 var bullets = [];
 
+var e;
+
 function setup() {
   createCanvas(1080, 720);
 
@@ -19,18 +21,14 @@ function setup() {
 
   background(0);
 
+  e = new enemy(200, 200, 20);
+
 }
 
 function mouseClicked() {
-  var angle = atan((mouseY-pos.y)/(mouseX-pos.x));
-  if(mouseX < pos.x) angle += PI;
 
-  var a = 1;
-  var o = (mouseY-pos.y)/(mouseX-pos.x);
-  if(mouseX < pos.x) a = -1;
-  // if(mouseY < pos.y) o *= -1;
 
-  bullets.push(new bullet(pos.x, pos.y, a, o, 5));
+  bullets.push(new bullet(pos.x, pos.y, mouseX-pos.x, mouseY-pos.y, 5));
 }
 
 function keyPressed() {
@@ -48,7 +46,8 @@ function keyReleased() {
 }
 
 function draw() {
-  background(0, 50);
+  background(0, 100);
+
 
 
   if(keyIsDown(LEFT_ARROW) || left) vel.x -= 0.5;
@@ -64,7 +63,7 @@ function draw() {
   pos.add(vel);
 
   noFill();
-  stroke(255, 0, 0);
+  stroke(0, 255, 0);
   strokeWeight(2);
 
   push()
@@ -80,6 +79,8 @@ function draw() {
   for(b = bullets.length-1; b > -1; b--) {
     bullets[b].show(b);
   }
+
+  e.show();
 
   vel.mult(0.95);
 

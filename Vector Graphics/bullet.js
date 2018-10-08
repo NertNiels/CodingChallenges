@@ -1,24 +1,17 @@
-function bullet(x, y, a, o, intensity) {
+function bullet(x, y, dX, dY, intensity) {
 
   this.pos = createVector(x, y);
-  this.a = a;
-  this.o = o;
+  this.dX = dX;
+  this.dY = dY;
   this.intensity = intensity;
 
   this.show = function(i) {
     stroke(255);
     strokeWeight(this.intensity);
 
-    var w;
-    if(a < 0) w = 0;
-    else w = width;
 
-    var eX = (w-this.pos.x)*a;
-    var eY = eX*o;
-    // if(eY < 0) eY = 0;
-    if (eY >= height) eY = height;
 
-    line(this.pos.x, this.pos.y, this.pos.x + eX, this.pos.y + eY);
+    line(this.pos.x, this.pos.y, this.pos.x + (this.dX*10), this.pos.y + (this.dY*10));
 
     this.intensity--;
 
