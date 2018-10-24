@@ -18,7 +18,6 @@ function setup() {
 
   background(0);
 
-  e = new enemy(200, 200, 20);
 
   obj = new object(createVector(100, 100), createVector(120, 60), createVector(140, 100));
 
@@ -29,6 +28,10 @@ function mouseClicked() {
 
 
   bullets.push(new bullet(play.pos.x, play.pos.y, mouseX-play.pos.x, mouseY-play.pos.y, 5));
+}
+
+function mouseMoved() {
+  play.updateAngle();
 }
 
 function keyPressed() {
@@ -62,9 +65,7 @@ function draw() {
   stroke(0, 255, 0);
   strokeWeight(2);
 
-  var angle = atan((mouseY-play.pos.y)/(mouseX-play.pos.x));
-  if(mouseX < play.pos.x) angle += PI;
-  play.angle = angle;
+
 
   play.show();
 
