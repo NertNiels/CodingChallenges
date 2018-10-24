@@ -34,7 +34,7 @@ function object(...points) {
     return uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1;
   }
 
-  this.rotate = function(angle) {ddwasadwsaw
+  this.rotate = function(angle) {
     if(this.angle == angle) return;
     this.angle = angle;
 
