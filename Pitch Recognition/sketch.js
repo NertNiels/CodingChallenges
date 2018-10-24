@@ -9,9 +9,11 @@ function setup() {
   createCanvas(1200, 800);
 
   carrier = new p5.Oscillator('sine');
-  carrier.amp(1.0, 1);
-  carrier.freq(freq);
+  carrier.amp(0, 1);
+  carrier.freq(freq); 
   carrier.start();
+
+  initMidi();
 }
 
 function keyPressed() {

@@ -1,6 +1,3 @@
-var pos;
-var vel;
-
 var left = false;
 var right = false;
 var up = false;
@@ -8,7 +5,7 @@ var down = false;
 
 var bullets = [];
 
-var e;
+var play;
 
 function setup() {
   createCanvas(1080, 720);
@@ -23,12 +20,15 @@ function setup() {
 
   e = new enemy(200, 200, 20);
 
+  obj = new object(createVector(100, 100), createVector(120, 60), createVector(140, 100));
+
+  play = new player(createVector(width/2, height/2));
 }
 
 function mouseClicked() {
 
 
-  bullets.push(new bullet(pos.x, pos.y, mouseX-pos.x, mouseY-pos.y, 5));
+  bullets.push(new bullet(play.pos.x, play.pos.y, mouseX-play.pos.x, mouseY-play.pos.y, 5));
 }
 
 function keyPressed() {
@@ -46,42 +46,33 @@ function keyReleased() {
 }
 
 function draw() {
-  background(0, 100);
+  background(25);
 
 
 
-  if(keyIsDown(LEFT_ARROW) || left) vel.x -= 0.5;
-  if(keyIsDown(RIGHT_ARROW) || right) vel.x += 0.5;
-  if(keyIsDown(UP_ARROW) || up) vel.y -= 0.5;
-  if(keyIsDown(DOWN_ARROW) || down) vel.y += 0.5;
+  if(keyIsDown(LEFT_ARROW) || left) play.vel.x -= 0.5;
+  if(keyIsDown(RIGHT_ARROW) || right) play.vel.x += 0.5;
+  if(keyIsDown(UP_ARROW) || up) play.vel.y -= 0.5;
+  if(keyIsDown(DOWN_ARROW) || down) play.vel.y += 0.5;
 
-  if(vel.x < -5) vel.x = -5;
-  else if(vel.x > 5) vel.x = 5;
-  if(vel.y < -5) vel.y = -5;
-  else if(vel.y > 5) vel.y = 5;
 
-  pos.add(vel);
+
 
   noFill();
   stroke(0, 255, 0);
   strokeWeight(2);
 
-  push()
-  translate(pos.x, pos.y);
+  var angle = atan((mouseY-play.pos.y)/(mouseX-play.pos.x));
+  if(mouseX < play.pos.x) angle += PI;
+  play.angle = angle;
 
-  var angle = atan((mouseY-pos.y)/(mouseX-pos.x));
-  if(mouseX < pos.x) angle += PI;
-  rotate(angle);
-
-  triangle(-10, -10, -10, 10, 20, 0);
-  pop();
+  play.show();
 
   for(b = bullets.length-1; b > -1; b--) {
     bullets[b].show(b);
   }
 
-  e.show();
 
-  vel.mult(0.95);
+  obj.show();
 
 }

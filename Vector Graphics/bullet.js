@@ -3,7 +3,12 @@ function bullet(x, y, dX, dY, intensity) {
   this.pos = createVector(x, y);
   this.dX = dX;
   this.dY = dY;
+  this.posEnd = createVector(this.pos.x + (this.dX*10), this.pos.y + (this.dY*10));
   this.intensity = intensity;
+
+  if(obj.collideLine(this.pos.x, this.pos.y, this.posEnd.x, this.posEnd.y)) {
+    console.log("oof");
+  }
 
   this.show = function(i) {
     stroke(255);
@@ -11,7 +16,7 @@ function bullet(x, y, dX, dY, intensity) {
 
 
 
-    line(this.pos.x, this.pos.y, this.pos.x + (this.dX*10), this.pos.y + (this.dY*10));
+    line(this.pos.x, this.pos.y, this.posEnd.x, this.posEnd.y);
 
     this.intensity--;
 
