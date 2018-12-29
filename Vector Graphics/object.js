@@ -1,24 +1,29 @@
-function object(...points) {
-  this.points = points;
-
-  this.pointsRotate = points;
-
+function object() {
   this.angle = 0;
+
+  this.init = function(...points) {
+    this.points = points;
+
+    this.pointsRotate = points;
+  }
 
   this.show = function() {
     strokeWeight(2);
     stroke(0, 255, 0);
+    fill(255, 0, 0);
 
     beginShape();
-    for(i = 0; i < points.length; i++) {
-      vertex(points[i].x, points[i].y);
+    for(i = 0; i < this.points.length; i++) {
+      vertex(this.pointsRotate[i].x, this.pointsRotate[i].y);
     }
     endShape(CLOSE);
+
+
   }
 
   this.collideLine = function(x1, y1, x2, y2) {
-    for(i = 0; i < points.length; i++) {
-      if(i == points.length-1) {
+    for(i = 0; i < this.points.length; i++) {
+      if(i == this.points.length-1) {
         if(this.lineline(x1, y1, x2, y2, this.pointsRotate[i].x, this.pointsRotate[i].y, this.pointsRotate[0].x, [this.pointsRotate[0].y])) return true;
       } else {
         if(this.lineline(x1, y1, x2, y2, this.pointsRotate[i].x, this.pointsRotate[i].y, this.pointsRotate[i+1].x, [this.pointsRotate[i+1].y])) return true;
@@ -38,10 +43,12 @@ function object(...points) {
     if(this.angle == angle) return;
     this.angle = angle;
 
-    for(i = 0; i < points.length; i++) {
-      this.pointsRotate[i].x = x*cos(angle)-y*sin(angle);
-      this.pointsRotate[i].y = y*cos(angle)+x*sin(angle);
-    }
+    // console.log(this.angle);
 
+    for(i = 0; i < this.points.length; i++) {
+
+      this.pointsRotate[i].x = this.points[i].x*cos(this.angle)-this.points[i].y*sin(this.angle);
+      this.pointsRotate[i].y = this.points[i].y*cos(this.angle)+this.points[i].x*sin(this.angle);
+    }
   }
 }

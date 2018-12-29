@@ -7,6 +7,8 @@ var bullets = [];
 
 var play;
 
+var ANGLE = 0;
+
 function setup() {
   createCanvas(1080, 720);
 
@@ -19,7 +21,8 @@ function setup() {
   background(0);
 
 
-  obj = new object(createVector(100, 100), createVector(120, 60), createVector(140, 100));
+  obj = new object();
+  obj.init(createVector(100, 100), createVector(120, 60), createVector(140, 100));
 
   play = new player(createVector(width/2, height/2));
 }

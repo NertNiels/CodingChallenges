@@ -3,7 +3,8 @@ function player(pos, name) {
   this.vel = createVector(0, 0);
   this.angle = 0;
 
-  this.obj = new object(createVector(-10, -10), createVector(-10, 10), createVector(20, 0));
+  this.obj = new object();
+  this.obj.init(createVector(-10, -10), createVector(-10, 10), createVector(20, 0));
 
   this.name = name;
 
